@@ -1,0 +1,134 @@
+/* Reset default styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Register Page Background */
+
+.register-container {
+    min-height: 100vh;
+    width: 100vw;  /* Ensure full width */
+    background: url("https://i.imgur.com/dp6KuCM.png") no-repeat center center fixed;
+    background-size: 100% 100%; /* Ensure it stretches fully */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Register Box */
+.register-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9); /* Transparent effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+/* Register Title */
+.register-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Input Fields */
+.register-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: 0.3s;
+}
+
+.register-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 5px rgba(22, 163, 74, 0.5);
+}
+
+/* Register Button */
+.register-button {
+    width: 100%;
+    background: #16a34a;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-button:hover {
+    background: #15803d;
+}
+
+/* Divider */
+.register-divider {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.register-divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background: #ccc;
+}
+
+.register-or {
+    padding: 0 10px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Google Sign-Up Button */
+.register-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #dc2626;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.register-google:hover {
+    background: #b91c1c;
+}
+
+/* Text & Links */
+.register-text {
+    margin-top: 1rem;
+    text-align: center;
+    color: #555;
+    font-size: 1rem;
+}
+
+.register-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+

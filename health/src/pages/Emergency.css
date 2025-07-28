@@ -1,0 +1,101 @@
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #f1f5f9;
+}
+
+/* Bigger Emergency Box */
+.emergency-container {
+  max-width: 500px; /* Increased width */
+  width: 95%;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More shadow for depth */
+  padding: 24px; /* More padding */
+  background: white;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Make it pop */
+.emergency-container:hover {
+  transform: scale(1.02);
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #1e293b;
+}
+
+.subheading {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #334155;
+}
+
+/* Emergency Buttons */
+.emergency-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Call Emergency Button */
+.call-button {
+  background-color: #dc2626;
+  color: white;
+}
+
+.call-button:hover {
+  background-color: #b91c1c;
+}
+
+/* SOS Button */
+.sos-button {
+  background-color: #facc15;
+  color: black;
+}
+
+.sos-button:hover {
+  background-color: #eab308;
+}
+
+/* Trusted Contacts */
+.toggle-form-button {
+  display: block;
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-form-button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+  

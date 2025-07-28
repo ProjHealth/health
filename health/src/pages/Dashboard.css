@@ -1,0 +1,185 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dashboard Container - Full Screen */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf7 100%);
+  padding: 5vh 5vw;
+}
+
+/* App Title */
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a365d;
+  margin: 3vh 0 5vh;
+  text-align: center;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Grid Layout for Icons */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4vh 3vw;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+/* Individual Dashboard Icons */
+.dashboard-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 3vh 2vw;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  aspect-ratio: 3/2;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  opacity: 0.7;
+  transition: height 0.3s ease;
+}
+
+.dashboard-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dashboard-icon:hover::before {
+  height: 6px;
+}
+
+/* Icon Styling */
+.icon {
+  font-size: 3.5rem;
+  margin-bottom: 2vh;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-icon:hover .icon {
+  transform: scale(1.1);
+}
+
+/* Custom Colors for Icons and Top Borders */
+.mood::before { background-color: #f39c12; }
+.ai::before { background-color: #8e44ad; }
+.community::before { background-color: #e74c3c; }
+.emergency::before { background-color: #d63031; }
+.support::before { background-color: #16a085; }
+.add-friend::before { background-color: #2980b9; }
+
+.mood { color: #f39c12; }         /* Mood Tracking - Yellow */
+.ai { color: #8e44ad; }           /* AI Friend - Purple */
+.community { color: #e74c3c; }    /* Communities - Red */
+.emergency { color: #d63031; }    /* Emergency - Dark Red */
+.support { color: #16a085; }      /* Professional Support - Teal */
+.add-friend { color: #2980b9; }   /* Add Friend - Blue */
+
+/* Icon Text */
+.dashboard-icon p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  color: #2d3748;
+  transition: color 0.3s ease;
+}
+
+.dashboard-icon:hover p {
+  color: #1a202c;
+}
+
+/* Badge for Emergency */
+.emergency-icon {
+  position: relative;
+}
+
+.emergency-icon::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 12px;
+  height: 12px;
+  background-color: #d63031;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 1600px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .icon {
+    font-size: 4rem;
+  }
+  
+  .dashboard-icon p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 3vh;
+  }
+  
+  .dashboard-icon {
+    aspect-ratio: auto;
+    padding: 4vh 4vw;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+    margin: 2vh 0 4vh;
+  }
+}

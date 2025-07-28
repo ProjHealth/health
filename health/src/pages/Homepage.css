@@ -1,0 +1,120 @@
+
+.home-container {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('https://i.imgur.com/FQwUnVI.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  
+  
+  /* Overlay for better text visibility */
+  .home-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    z-index: -1;
+  }
+  
+  /* Title */
+  .home-title {
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Subtitle */
+  .home-text {
+    font-size: 2rem;
+    margin-top: 10px;
+    max-width: 600px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+    text-align: center;  /* Centers the text */
+    margin-left: auto;   /* Centers the container horizontally */
+    margin-right: auto;
+}
+  
+  /* Button styles */
+  .home-buttons {
+    margin-top: 20px;
+  }
+  
+  .home-buttons button {
+    padding: 12px 24px;
+    margin: 10px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .home-login {
+    background-color: #c36ba1;
+    color: rgb(128, 41, 41);
+  }
+  
+  .home-register {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .home-buttons button:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  
+  /* Infinite Scroll Effect */
+  .home-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+  }
+  .button-blue, .button-green {
+    font-size: 3rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+/* Soothing blue button */
+.button-blue {
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: white;
+}
+
+.button-blue:hover {
+    background: linear-gradient(135deg, #2980b9, #6dd5fa);
+    transform: translateY(-2px);
+}
+
+/* Soothing green button */
+.button-green {
+    background: linear-gradient(135deg, #96e6a1, #11998e);
+    color: white;
+}
+
+.button-green:hover {
+    background: linear-gradient(135deg, #11998e, #96e6a1);
+    transform: translateY(-2px);
+}
+
+  
+  
