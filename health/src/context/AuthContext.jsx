@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { auth, googleProvider } from "../firebase/firebase";
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+// import { auth, googleProvider } from "../firebase/firebase";
+// import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 
 // Create AuthContext
 const AuthContext = createContext();
@@ -13,26 +13,24 @@ export const AuthProvider = ({ children }) => {
 
   // Listen for auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+    // On mount, check localStorage for user
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
   }, []);
 
   // Logout Function
-  const logout = async () => {
-    await signOut(auth);
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
   };
 
-  // Google Sign-In
+  // Google Sign-In (not implemented)
   const loginWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (error) {
-      console.error("Google Sign-In Error:", error.message);
-    }
+    alert("Google sign-in is not implemented in the new backend.");
   };
 
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/firebase";
+// import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+// import { auth, googleProvider } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Import CSS
 
@@ -12,20 +12,25 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Login failed");
+      // Store JWT and user info
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error.message);
     }
   };
 
+  // Google sign-in remains as is, or you can remove if not needed
   const handleGoogleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Google Sign-In error:", error.message);
-    }
+    alert("Google sign-in is not implemented in the new backend.");
   };
 
   return (

@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { db } from "../firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 import { User } from "lucide-react";
 

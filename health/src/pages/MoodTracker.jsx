@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import { db } from "../firebase/firebase"; // Ensure correct path
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import React, { useState } from "react"; 
 import "./MoodTracker.css"; // Import the CSS file
 
 const MoodTracker = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/firebase";
+// import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+// import { auth, googleProvider } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import "./Register.css"; // Import the CSS file
 
@@ -12,20 +12,25 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard"); // Redirect after successful registration
+      // You can add a name field if needed
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, name: email.split('@')[0] })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Registration failed");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/dashboard");
     } catch (error) {
       console.error("Registration error:", error.message);
     }
   };
 
+  // Google sign-in remains as is, or you can remove if not needed
   const handleGoogleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      navigate("/dashboard"); // Redirect after Google Sign-In
-    } catch (error) {
-      console.error("Google Sign-In error:", error.message);
-    }
+    alert("Google sign-in is not implemented in the new backend.");
   };
 
   return (

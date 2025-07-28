@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { db } from "../firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 
 const AddContactForm = () => {
