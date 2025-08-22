@@ -22,7 +22,7 @@ Session(app)  # Corrected Session initialization
 logging.basicConfig(level=logging.DEBUG)
 
 # Configure Gemini API
-API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyAaxhIVp0jv2wic7hQ9HhO9F5mLjAp8K04")  # Replace with your actual API key
+API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyBTKDLzsYZszq9543zvYBTh_lzna4VJVvQ")  # Replace with your actual API key
 genai.configure(api_key=API_KEY)
 
 # Initialize models - Use try/except to handle any initialization errors

@@ -9,6 +9,7 @@ import Emergency from "../pages/Emergency"; // ✅ Import Emergency Page
 import ProtectedRoute from "../components/ProtectedRoute";
 import Chatbot from "../pages/Chatbot";
 import MoodTracker from "../pages/MoodTracker";
+import MoodCalendar from "../pages/MoodCalendar";
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         {/* Protected Routes (Requires Authentication) */}
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/moodtracker" element={<ProtectedRoute><MoodTracker /></ProtectedRoute>} />
+        <Route path="/moodcalendar" element={<ProtectedRoute><MoodCalendar /></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><CommunityGroups /></ProtectedRoute>} />
         <Route path="/group/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
         <Route path="/chatbot" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />

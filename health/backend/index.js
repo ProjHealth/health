@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
+import communitiesRoutes from "./routes/communities.js";
+import moodsRoutes from "./routes/moods.js";
 
 dotenv.config();
 
@@ -12,6 +14,8 @@ app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/communities", communitiesRoutes);
+app.use("/api/moods", moodsRoutes);
 
 const PORT = process.env.PORT || 5000;
 
