@@ -1,8 +1,9 @@
 import { useState } from "react";
-// import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-// import { auth, googleProvider } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import "./Login.css"; // Import CSS
+
+const GOOGLE_CLIENT_ID = "998669542963-tsi7j94uvq0g0vtn580p2v0emsl6e2tm.apps.googleusercontent.com"; // Replace with your Google client ID
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,39 +24,63 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/dashboard");
+      alert("Login successful!");
     } catch (error) {
+      alert(error.message + " !! Please enter valid credentials");
       console.error("Login error:", error.message);
     }
   };
 
-  // Google sign-in remains as is, or you can remove if not needed
-  const handleGoogleSignIn = async () => {
-    alert("Google sign-in is not implemented in the new backend.");
+  // Google OAuth handler
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      // Send credential to backend for verification and login
+      const res = await fetch("http://localhost:5000/api/auth/google", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential: credentialResponse.credential })
+        
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Google login failed");
+      // Store JWT and user info
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/dashboard");
+      alert("Google login successful!");
+    } catch (error) {
+      alert(error.message + " !! Google login failed");
+      console.error("Google login error:", error.message);
+    }
+  };
+
+  const handleGoogleError = () => {
+    alert("Google sign-in failed. Please try again.");
   };
 
   return (
-    <div className="login-page"> {/* Full-page background */}
-      <div className="login-box">
-        <h2 className="login-title">Login</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="login-input" />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="login-input" />
-          <button type="submit" className="custom-button login">Login</button>
-        </form>
-        <div className="or-divider"><span>OR</span></div>
-        <button onClick={handleGoogleSignIn} className="custom-button google">
-          <img src="https://img.icons8.com/color/24/000000/google-logo.png" alt="Google" /> Sign in with Google
-        </button>
-        <p className="register-text">Don't have an account?{" "}
-          <a href="/register" className="register-link">Register here</a>
-        </p>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <div className="login-page"> {/* Full-page background */}
+        <div className="login-box">
+          <h2 className="login-title">Login</h2>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="login-input" />
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="login-input" />
+            <button type="submit" className="custom-button login">Login</button>
+          </form>
+          <div className="or-divider"><span>OR</span></div>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            width="100%"
+          />
+          <p className="register-text">Don't have an account?{" "}
+            <a href="/register" className="register-link">Register here</a>
+          </p>
+        </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
-  
-  
-
-
 };
 
 export default Login;

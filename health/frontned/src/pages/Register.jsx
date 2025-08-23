@@ -23,7 +23,9 @@ const Register = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/dashboard");
+      alert("Registration successful! You can now log in.");
     } catch (error) {
+      alert(error.message + " !! Please enter valid credentials");
       console.error("Registration error:", error.message);
     }
   };
