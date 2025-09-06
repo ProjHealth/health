@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-
+import "./CommunityGroups.css";
 
 const CommunityGroups = () => {
   const [communities, setCommunities] = useState([]);
@@ -29,7 +29,7 @@ const CommunityGroups = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, description })
+        body: JSON.stringify({ name, description, creator: user.name }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to create group");
@@ -60,50 +60,43 @@ const CommunityGroups = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-indigo-600 mb-8 text-center">
-        Community Support Groups
-      </h1>
+    <div className="community-page">
+      <h1>Community Support Groups</h1>
 
       {/* Create Group Form */}
-      <form onSubmit={handleCreate} className="mb-8 w-full max-w-md bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-semibold mb-2">Create a New Group</h2>
+      <form onSubmit={handleCreate} className="create-group-form">
+        <h2>Create a New Group</h2>
         <input
           type="text"
           placeholder="Group Name"
           value={name}
           onChange={e => setName(e.target.value)}
-          className="w-full mb-2 p-2 border rounded"
           required
         />
         <textarea
           placeholder="Description"
           value={description}
           onChange={e => setDescription(e.target.value)}
-          className="w-full mb-2 p-2 border rounded"
           required
         />
-        <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded" disabled={loading}>
+        <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create Group"}
         </button>
       </form>
 
       {/* List of Groups */}
-      <div className="w-full max-w-md space-y-4">
+      <div className="groups-list">
         {communities.length === 0 ? (
           <p>No groups yet.</p>
         ) : (
           communities.map(group => (
-            <div key={group._id} className="bg-white p-4 rounded shadow flex flex-col gap-2">
-              <div className="font-bold text-lg">{group.name}</div>
-              <div className="text-gray-700">{group.description}</div>
-              <div className="text-xs text-gray-500">Created by: {group.creator?.name || "Unknown"}</div>
-              <button
-                className="bg-green-600 text-white px-3 py-1 rounded w-fit"
-                onClick={() => handleJoin(group._id)}
-              >
-                Join Group
-              </button>
+            <div key={group._id} className="group-card">
+              <div className="group-title">{group.name}</div>
+              <div className="group-desc">{group.description}</div>
+              <div className="group-meta">
+                Created by: {group.creator.name}
+              </div>
+              <button onClick={() => handleJoin(group._id)}>Join Group</button>
             </div>
           ))
         )}
@@ -113,4 +106,3 @@ const CommunityGroups = () => {
 };
 
 export default CommunityGroups;
-
