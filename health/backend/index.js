@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import communitiesRoutes from "./routes/communities.js";
 import moodsRoutes from "./routes/moods.js";
+import moodRoutes from './routes/mood.js';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/communities", communitiesRoutes);
 app.use("/api/moods", moodsRoutes);
+app.use('/api/v1/mood', moodRoutes);
 
 const PORT = process.env.PORT || 5000;
 
