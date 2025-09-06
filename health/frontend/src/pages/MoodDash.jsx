@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import MoodInput from "./MoodInput";
+import EmotionChart from "../components/EmotionChart";
 
-const MoodDash = () => {
+const MoodDashboard = () => {
   const [refresh, setRefresh] = useState(false);
 
   const handleMoodLogged = () => {
-    setRefresh((prev) => !prev); // toggle → trigger chart refresh later
+    setRefresh((prev) => !prev); // trigger refresh
   };
 
   return (
     <div className="max-w-xl mx-auto mt-6">
       <h2 className="text-xl font-semibold mb-4">Track Your Mood</h2>
-      <MoodInput userId="64f0c5a1234567890abcd123" onMoodLogged={handleMoodLogged} />
-      {/* Later we’ll add the EmotionChart here */}
+      <MoodInput onMoodLogged={handleMoodLogged} />
+      <EmotionChart key={refresh} /> {/* re-render when mood added */}
     </div>
   );
 };
 
-export default MoodDash;
+export default MoodDashboard;
