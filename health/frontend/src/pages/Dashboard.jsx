@@ -11,7 +11,7 @@ const Dashboard = () => {
       {/* Icons - Grid Layout */}
       <div className="dashboard-grid">
         {/* Mood Tracking */}
-        <Link to="/moodtracker" className="dashboard-icon">
+        <Link to="/MoodInput" className="dashboard-icon">
           <FaSmile className="icon mood" />
           <p>Mood Tracking</p>
         </Link>
