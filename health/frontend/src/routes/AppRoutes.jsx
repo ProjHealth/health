@@ -11,6 +11,7 @@ import Chatbot from "../pages/Chatbot";
 import MoodInput  from "../pages/MoodInput";
 import MoodDashboard from "../pages/MoodDash";
 
+
 const AppRoutes = () => {
   return (
     <Router>
@@ -23,7 +24,7 @@ const AppRoutes = () => {
         {/* Protected Routes (Requires Authentication) */}
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><CommunityGroups /></ProtectedRoute>} />
-        <Route path="/group/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
+        <Route path="/groups/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
         <Route path="/chatbot" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
         <Route path="/emergency" element={<ProtectedRoute><Emergency /></ProtectedRoute>} />
         <Route path="/mooddashboard" element={<ProtectedRoute><MoodDashboard /></ProtectedRoute>} />

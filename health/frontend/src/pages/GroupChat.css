@@ -1,0 +1,40 @@
+/* ...existing code if any... */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  max-width: 75%;
+  padding: 12px;
+  border-radius: 10px;
+  word-wrap: break-word;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sent {
+  align-self: flex-end;
+  background: #4f46e5;
+  color: white;
+  text-align: right;
+}
+
+.received {
+  align-self: flex-start;
+  background: #e5e7eb;
+  color: black;
+  text-align: left;
+}
+
+.sender-name {
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 4px;
+  font-size: 0.95em;
+}

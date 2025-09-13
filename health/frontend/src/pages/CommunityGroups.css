@@ -1,12 +1,23 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;   /* prevent horizontal scroll */
+  overflow-y: auto;     /* allow vertical scroll */
+}
+
 .community-page {
-  max-width: 800px;
-  margin: 40px auto;
+  width: 100%;
+  margin: 20px 0;
   padding: 20px;
+  box-sizing: border-box;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .community-page h1 {
   font-size: 24px;
@@ -89,4 +100,20 @@
 
 .group-card button:hover {
   background-color: #3e8e41;
+}
+
+.group-card .joined-btn {
+  background-color: #bbb;
+  color: #fff;
+  cursor: default;
+}
+
+.group-card .view-btn {
+  background-color: #2196f3;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.group-card .view-btn:hover {
+  background-color: #1769aa;
 }
