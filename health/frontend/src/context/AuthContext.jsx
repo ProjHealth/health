@@ -10,13 +10,18 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null);
 
   // Listen for auth state changes
   useEffect(() => {
-    // On mount, check localStorage for user
+    // On mount, check localStorage for user and token
     const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+    if (storedToken) {
+      setToken(storedToken);
     }
     setLoading(false);
   }, []);
@@ -26,6 +31,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+    setToken(null);
   };
 
   // Google Sign-In (not implemented)
@@ -34,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout, loginWithGoogle }}>
+    <AuthContext.Provider value={{ user, token, loading, logout, loginWithGoogle }}>
       {!loading && children}
     </AuthContext.Provider>
   );

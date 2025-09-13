@@ -13,6 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset + scrollable body */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: block;          /* no forced flex on whole page */
+  overflow-x: hidden;      /* no sideways scroll */
+  overflow-y: auto;        /* allow vertical scrolling */
+  background-color: #ffffff;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -20,16 +31,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 320px;
-  height: 100vh;
-  overflow: hidden;
 }
 
 h1 {
@@ -55,43 +56,118 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-.group-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  padding: 14px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: #4f46e5;
-  transition: background 0.3s ease, transform 0.2s;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+
+/* ---------------- COMMUNITY PAGE ---------------- */
+.community-page {
   width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Add scroll for overflow */
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
-.group-box:hover {
-  background: #4f46e5;
-  color: white;
-  transform: scale(1.07);
+.community-page h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-/* Centering the entire page */
-body {
+.create-group-form {
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.create-group-form h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.create-group-form input,
+.create-group-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-group-form button[type="submit"] {
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.create-group-form button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.groups-list {
+  margin-top: 20px;
+}
+
+.group-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.group-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.group-desc {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.group-meta {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.group-card button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.group-card button:hover {
+  background-color: #3e8e41;
+}
+
+/* ---------------- CHAT PAGE ---------------- */
+.page-center {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-/* Chat Container - Now takes full width */
 .chat-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 90vw;  /* 90% of viewport width */
-  max-width: 900px; /* Prevents excessive stretching on large screens */
+  width: 90vw;
+  max-width: 900px;
   height: 90vh;
   background: white;
   padding: 20px;
@@ -99,17 +175,15 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Chat Messages */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* More spacing between messages */
+  gap: 12px;
 }
 
-/* Messages */
 .message {
   max-width: 75%;
   padding: 12px;
@@ -119,24 +193,22 @@ body {
 
 .sent {
   align-self: flex-end;
-  background: #4f46e5; /* Indigo */
+  background: #4f46e5;
   color: white;
 }
 
 .received {
   align-self: flex-start;
-  background: #e5e7eb; /* Light Gray */
+  background: #e5e7eb;
   color: black;
 }
 
-/* Sender Name */
 .sender-name {
   font-weight: bold;
-  color: #4f46e5; /* Blue */
+  color: #4f46e5;
   margin-bottom: 4px;
 }
 
-/* Input Container */
 .chat-input-container {
   display: flex;
   gap: 10px;
@@ -162,16 +234,7 @@ body {
   font-size: 1rem;
 }
 
-.dashboard-icon {
-  transition: all 0.3s ease-in-out;
-}
-
-.dashboard-icon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Emergency Page Styles */
+/* ---------------- EMERGENCY PAGE ---------------- */
 .emergency-container {
   padding: 1rem;
   max-width: 600px;
@@ -199,13 +262,11 @@ body {
   gap: 0.5rem;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
 .emergency-button:hover {
   transform: scale(1.05);
   opacity: 0.9;
 }
 
-/* Specific Button Styles */
 .call-button {
   background-color: #dc2626;
   color: white;
@@ -220,26 +281,22 @@ body {
   background-color: #3b82f6;
   color: white;
 }
-
 .contact-button:hover {
   background-color: #2563eb;
 }
 
-/* Trusted Contacts Section */
 .trusted-contacts {
   margin-top: 1rem;
   padding: 0.5rem;
   border-top: 2px solid #ddd;
 }
-
 .trusted-contacts h3 {
   font-size: 1.25rem;
   font-weight: bold;
   margin-top: 1rem;
 }
 
-
-
+/* ---------------- THEME ---------------- */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
