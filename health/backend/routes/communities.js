@@ -1,6 +1,5 @@
 import express from "express";
 import Community from "../models/Community.js";
-import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
 const router = express.Router();
@@ -28,8 +27,8 @@ router.post("/create", authMiddleware, async (req, res) => {
     const community = new Community({
       name,
       description,
-      creator: req.userId,
-      members: [req.userId],
+      creator : req.userId,
+      members : [req.userId],
     });
     await community.save();
     res.status(201).json(community);
