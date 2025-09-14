@@ -123,32 +123,44 @@ router.post("/join/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Leave a community
+
 router.post("/leave/:id", authMiddleware, async (req, res) => {
-  console.log("POST /leave/:id - Community ID:", req.params.id, "User ID:", req.userId);
-  
-  try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: "Invalid community ID" });
+  console.log("POST /leave/:id - Community ID:", req.params.id, "User ID:", req.userId);
+  
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid community ID" });
+    }
+
+    const community = await Community.findById(req.params.id);
+    if (!community) {
+      return res.status(404).json({ message: "Community not found" });
+    }
+
+
+    if (community.members.length === 1 && community.members[0].toString() === req.userId.toString()) {
+      // If they are also the creator, tell them to delete the group instead
+      if (community.creator.toString() === req.userId.toString()) {
+        return res.status(400).json({ message: "You are the last member and creator. Please delete the group instead of leaving." });
+      }
+      // If they are the last member but not the creator, this could be an edge case,
+      // but for now we can prevent leaving to avoid an empty group.
+      return res.status(400).json({ message: "You cannot leave as you are the last member." });
     }
+    // **NEW LOGIC ENDS HERE**
 
-    const community = await Community.findById(req.params.id);
-    if (!community) {
-      return res.status(404).json({ message: "Community not found" });
-    }
+    // Original logic to remove user from members array
+    community.members = community.members.filter(
+      (memberId) => memberId.toString() !== req.userId.toString()
+    );
+    await community.save();
 
-    // Remove user from members array
-    community.members = community.members.filter(
-      (memberId) => memberId.toString() !== req.userId.toString()
-    );
-    await community.save();
-
-    console.log("User removed from community successfully");
-    res.json({ message: "Left group successfully" });
-  } catch (err) {
-    console.error("Error in /leave:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
+    console.log("User removed from community successfully");
+    res.json({ message: "Left group successfully" });
+  } catch (err) {
+    console.error("Error in /leave:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 });
 
 // Delete a community (only creator can delete)
