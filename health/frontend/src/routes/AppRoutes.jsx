@@ -5,15 +5,14 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import CommunityGroups from "../pages/CommunityGroups";
 import GroupChat from "../pages/GroupChat";
-import Emergency from "../pages/Emergency"; // ✅ Import Emergency Page
+import Emergency from "../pages/Emergency"; 
 import ProtectedRoute from "../components/ProtectedRoute";
 import Chatbot from "../pages/Chatbot";
-// import MoodTracker from "../pages/MoodTracker";
-// import MoodCalendar from "../pages/MoodCalendar";
 import MoodInput  from "../pages/MoodInput";
 import MoodDash from "../pages/MoodDash";
 import AddFriend from "../pages/Addfriend";
 import ChatPage from "../pages/ChatPage";
+
 
 
 const AppRoutes = () => {

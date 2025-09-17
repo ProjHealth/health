@@ -48,35 +48,6 @@ app.use('/api/v1/mood', moodRoutes);
 app.use('/api/friends', friendsRouter);
 app.use('/api/chat', chatRouter);
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'Server is running', 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
-  });
-});
-
-// Test endpoint for communities
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Server is working!', routes: ['auth', 'communities', 'moods', 'mood'] });
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Error occurred:', err);
-  res.status(500).json({ 
-    message: 'Internal server error', 
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
-  });
-});
-
-// 404 handler
-app.use((req, res) => {
-  console.log(`404 - Route not found: ${req.method} ${req.path}`);
-  res.status(404).json({ message: `Route not found: ${req.method} ${req.path}` });
-});
-
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URI, { 
@@ -84,19 +55,6 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true 
 })
   .then(() => {
-    console.log('✅ Connected to MongoDB successfully');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log(`📡 Available routes:`);
-      console.log(`   - POST http://localhost:${PORT}/api/auth/*`);
-      console.log(`   - GET/POST http://localhost:${PORT}/api/communities/*`);
-      console.log(`   - GET http://localhost:${PORT}/api/health`);
-      console.log(`   - GET http://localhost:${PORT}/api/test`);
-    });
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
-    process.exit(1);
-  });
-
-export default app;
+  .catch((err) => console.error("MongoDB connection error:", err));
