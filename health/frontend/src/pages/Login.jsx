@@ -72,7 +72,7 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleError}
-            width="100%"
+            width="300"
           />
           <p className="register-text">Don't have an account?{" "}
             <a href="/register" className="register-link">Register here</a>

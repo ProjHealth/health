@@ -9,7 +9,7 @@ import Emergency from "../pages/Emergency";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Chatbot from "../pages/Chatbot";
 import MoodInput  from "../pages/MoodInput";
-import MoodDash from "../pages/MoodDash";
+import MoodDashboard from "../pages/MoodDash";
 import AddFriend from "../pages/Addfriend";
 import ChatPage from "../pages/ChatPage";
 
@@ -32,7 +32,7 @@ const AppRoutes = () => {
         <Route path="/groups/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
         <Route path="/chatbot" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
         <Route path="/emergency" element={<ProtectedRoute><Emergency /></ProtectedRoute>} />
-        <Route path="/mooddash" element={<ProtectedRoute><MoodDash /></ProtectedRoute>} />
+        <Route path="/mooddashboard" element={<ProtectedRoute><MoodDashboard /></ProtectedRoute>} />
         <Route path="/moodinput" element={<ProtectedRoute><MoodInput /></ProtectedRoute>} /> 
         <Route path="/addfriend" element={<ProtectedRoute><AddFriend /></ProtectedRoute>} />
         <Route path="/chat/:chatId" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
