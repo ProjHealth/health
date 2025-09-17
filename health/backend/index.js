@@ -8,6 +8,7 @@ import moodsRoutes from "./routes/moods.js";
 import moodRoutes from './routes/mood.js';
 import friendsRouter from './routes/friends.js';
 import chatRouter from './routes/chat.js';
+import professionals from './routes/doctor.js';
 
 
 dotenv.config();
@@ -47,6 +48,7 @@ app.use("/api/moods", moodsRoutes);
 app.use('/api/v1/mood', moodRoutes);
 app.use('/api/friends', friendsRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/professionals',professionals);
 
 const PORT = process.env.PORT || 5000;
 
