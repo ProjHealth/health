@@ -6,6 +6,9 @@ import authRoutes from "./routes/auth.js";
 import communitiesRoutes from "./routes/communities.js";
 import moodsRoutes from "./routes/moods.js";
 import moodRoutes from './routes/mood.js';
+import friendsRouter from './routes/friends.js';
+import chatRouter from './routes/chat.js';
+
 
 dotenv.config();
 
@@ -42,6 +45,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/communities", communitiesRoutes);
 app.use("/api/moods", moodsRoutes);
 app.use('/api/v1/mood', moodRoutes);
+app.use('/api/friends', friendsRouter);
+app.use('/api/chat', chatRouter);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
