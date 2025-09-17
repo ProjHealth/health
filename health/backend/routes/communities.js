@@ -51,8 +51,8 @@ router.post("/create", authMiddleware, async (req, res) => {
     const community = new Community({
       name,
       description,
-      creator: req.userId,
-      members: [req.userId],
+      creator : req.userId,
+      members : [req.userId],
     });
     
     await community.save();

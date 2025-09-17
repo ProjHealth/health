@@ -8,6 +8,10 @@ import communitiesRoutes from './routes/communities.js';
 import moodsRoutes from './routes/moods.js';
 import moodRoutes from './routes/mood.js';
 import emergencyRoutes from './routes/emergency.js';
+import friendsRouter from './routes/friends.js';
+import chatRouter from './routes/chat.js';
+import professionals from './routes/doctor.js';
+
 
 dotenv.config();
 

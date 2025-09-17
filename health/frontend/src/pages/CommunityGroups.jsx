@@ -279,7 +279,7 @@ const CommunityGroups = () => {
       </form>
 
       {/* Groups list */}
-      <div className="groups-list">
+      <div className="groups-.list">
         {communities.length === 0 ? (
           <p>No communities found. Create the first one!</p>
         ) : (

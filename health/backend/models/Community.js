@@ -8,3 +8,4 @@ const communitySchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model("Community", communitySchema);
+
