@@ -1,0 +1,220 @@
+/* Addfriend Container with Dreamy Pastel Background */
+.addfriend-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+  padding: 2rem 1rem;
+}
+
+.addfriend-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(221, 160, 221, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.addfriend-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 154, 158, 0.3);
+  position: relative;
+}
+
+.addfriend-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff9a9e, #fecfef, #fad0c4);
+  border-radius: 2px;
+}
+
+/* Section Layout */
+.requests-container,
+.recommended-container,
+.friends-container {
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.section-heading::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 24px;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  border-radius: 3px;
+}
+
+/* Card Layout with Glass Effect */
+.user-item,
+.request-item,
+.recommended-item,
+.friend-item {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.user-item:hover,
+.request-item:hover,
+.recommended-item:hover,
+.friend-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+}
+
+.user-name,
+.request-name,
+.recommended-name,
+.friend-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+/* Buttons Base Style */
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.btn:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Accept Button */
+.btn-accept {
+  background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+  color: #2d5a3d;
+}
+
+.btn-accept:hover {
+  background: linear-gradient(135deg, #98e6bf 0%, #78d893 100%);
+}
+
+/* Decline Button */
+.btn-decline {
+  background: linear-gradient(135deg, #ffb3ba 0%, #ff9aa2 100%);
+  color: #5a2d2d;
+}
+
+.btn-decline:hover {
+  background: linear-gradient(135deg, #ffa3aa 0%, #ff8a92 100%);
+}
+
+/* Add Friend Button */
+.btn-add {
+  background: linear-gradient(135deg, #a8c8ec 0%, #7fb3d3 100%);
+  color: #2d4a5a;
+}
+
+.btn-add:hover {
+  background: linear-gradient(135deg, #98c8dc 0%, #6fb3c3 100%);
+}
+
+/* Chat Button */
+.btn-chat {
+  background: linear-gradient(135deg, #dda0dd 0%, #d8a2d8 100%);
+  color: #4a2d4a;
+}
+
+.btn-chat:hover {
+  background: linear-gradient(135deg, #cd90cd 0%, #c892c8 100%);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: #e2e8f0;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* Grid Layout */
+.recommended-grid,
+.friends-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Loading Spinner */
+.loading {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

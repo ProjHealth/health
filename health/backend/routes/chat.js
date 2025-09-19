@@ -146,4 +146,3 @@ router.post("/:chatId/message", authMiddleware, async (req, res) => {
 });
 
 export default router;
-
