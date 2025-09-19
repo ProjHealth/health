@@ -5,7 +5,7 @@ import Friendship from "../models/Friendship.js";
 
 const router = express.Router();
 
-// Middleware to verify JWT
+// Middleware to verify JWT - FIXED to match chat.js
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -14,20 +14,23 @@ function authMiddleware(req, res, next) {
   const token = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.id;
+    req.userId = decoded.id || decoded.userId; // FIXED: Now checks both properties
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }
 }
 
-// 🔹 Recommended Friends
 router.get("/recommended", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.userId).populate("friends", "_id");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const friendIds = (user.friends || []).map(f => f._id.toString());
 
-    // Exclude self, existing friends, sent/received requests
     const sentRequests = await Friendship.find({ requester: req.userId }).select("recipient");
     const receivedRequests = await Friendship.find({ recipient: req.userId }).select("requester");
 
@@ -66,7 +69,6 @@ router.post("/request/:id", authMiddleware, async (req, res) => {
   res.status(201).json(request);
 });
 
-
 // 🔹 Get Incoming Friend Requests
 router.get("/requests", authMiddleware, async (req, res) => {
   try {
@@ -102,9 +104,24 @@ router.post("/respond/:id", authMiddleware, async (req, res) => {
 
 // 🔹 Get Friends List
 router.get("/list", authMiddleware, async (req, res) => {
-  const user = await User.findById(req.userId).populate("friends", "name email");
-  res.json(user.friends);
+  try {
+    console.log("Friends list endpoint hit, userId:", req.userId); // Add debugging
+    
+    const user = await User.findById(req.userId).populate("friends", "name email");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const friends = user.friends || [];
+    console.log("Friends found:", friends.length); // Add debugging
+    res.json(friends);
+  } catch (err) {
+    console.error("Error fetching friends list:", err);
+    res.status(500).json({ message: "Server error" });
+  }
 });
+
 router.get("/all", async (req, res) => {
   try {
     const users = await User.find().select("name email");
