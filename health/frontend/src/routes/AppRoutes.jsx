@@ -13,7 +13,7 @@ import MoodDashboard from "../pages/MoodDash";
 import AddFriend from "../pages/Addfriend";
 import ChatPage from "../pages/ChatPage";
 import ProfessionalHelpDashboard from "../pages/ProfessionalHelp";
-
+import ExpertProfile from "../pages/ExpertProfile";
 
 
 const AppRoutes = () => {
@@ -38,6 +38,7 @@ const AppRoutes = () => {
         <Route path="/addfriend" element={<ProtectedRoute><AddFriend /></ProtectedRoute>} />
         <Route path="/chat/:chatId" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
         <Route path="/support" element={<ProtectedRoute><ProfessionalHelpDashboard /></ProtectedRoute>} />
+        <Route path="/expert/:expertId" element={<ExpertProfile />} /> 
         {/* Add more routes as needed */}
       </Routes>
     </Router>
