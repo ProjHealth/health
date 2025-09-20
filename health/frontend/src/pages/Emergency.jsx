@@ -17,6 +17,12 @@ const Emergency = () => {
     setContactsUpdatedTrigger(prev => prev + 1);
   };
   
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser) throw new Error("User not found in localStorage");
+
+      const parsedUser = JSON.parse(storedUser);
+      const userId = parsedUser.id;
+
   // Function to handle the SOS API call with geolocation
   const handleSendSos = async () => {
     if (!window.confirm('Are you sure you want to send an SOS to all trusted contacts?')) return;
@@ -37,7 +43,7 @@ const Emergency = () => {
       const response = await fetch(`${API_BASE}/emergency/sos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'default_user', location: { latitude, longitude } })
+        body: JSON.stringify({ userId, location: { latitude, longitude } })
       });
 
       const data = await response.json();

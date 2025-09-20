@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import fileUpload from "express-fileupload";
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import communitiesRoutes from './routes/communities.js';
@@ -13,9 +14,14 @@ import professionals from './routes/doctor.js';
 import expertsRoutes from './routes/experts.js';
 import { seedDatabase } from './seedExperts.js';
 import chatbotRoutes from './routes/chatbot.js';
+import speechRoute from "./routes/speechRoute.js";
+
+
 
 dotenv.config();
 const app = express();
+
+app.use(fileUpload());
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
@@ -42,6 +48,7 @@ app.use('/api/friends', friendsRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/professionals', professionals);
 app.use('/api/experts', expertsRoutes);
+app.use("/api/speech", speechRoute);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'Server is running', timestamp: new Date().toISOString() }));

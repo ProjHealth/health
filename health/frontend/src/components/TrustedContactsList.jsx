@@ -4,6 +4,9 @@ import AddContactForm from './AddContactForm';
 import './TrustedContactsList.css';
 
 const API_BASE = 'http://localhost:5000/api';
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  if (!localUser) throw new Error("User not found in localStorage");
+  const userId = localUser.id;
 
 const TrustedContactsList = ({ refreshTrigger = 0 }) => {
   const [contacts, setContacts] = useState([]);
@@ -19,7 +22,7 @@ const TrustedContactsList = ({ refreshTrigger = 0 }) => {
     setLoading(true);
     try {
       console.log('Fetching contacts...');
-      const response = await fetch(`${API_BASE}/contacts?userId=default_user`);
+      const response = await fetch(`${API_BASE}/contacts?userId=${userId}`);
       const data = await response.json();
       console.log('Contacts fetched:', data);
 

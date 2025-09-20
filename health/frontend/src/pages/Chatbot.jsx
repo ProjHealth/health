@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Chatbot.css";
 
-// ChatMessage component for individual messages
+// Component for individual messages
 const ChatMessage = ({ message }) => {
   const { sender, text } = message;
   const isBot = sender === "Bot";
@@ -20,19 +20,23 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [connectionError, setConnectionError] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+
   const messagesEndRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
 
   const SERVER = "http://localhost:5000"; // backend URL
 
-  // Parse user info from localStorage
+  // Get user info
   const localUser = JSON.parse(localStorage.getItem("user"));
   if (!localUser) throw new Error("User not found in localStorage");
   const userId = localUser.id;
 
-  // Fetch chat history from backend
+  // Fetch chat history
   const fetchHistory = async () => {
     try {
-      const res = await fetch(`${SERVER}/api/chat/${userId}`);
+      const res = await fetch(`${SERVER}/api/chatbot/${userId}`);
       if (!res.ok) {
         const err = await res.json();
         console.error("Failed to load chat:", err);
@@ -57,11 +61,12 @@ const Chatbot = () => {
     fetchHistory();
   }, []);
 
-  // Auto-scroll when messages update
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Send message
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -98,6 +103,7 @@ const Chatbot = () => {
     }
   };
 
+  // Handle enter key
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -105,6 +111,7 @@ const Chatbot = () => {
     }
   };
 
+  // Retry connection
   const retryConnection = async () => {
     setMessages((prev) => [
       ...prev,
@@ -116,7 +123,7 @@ const Chatbot = () => {
       if (response.ok) {
         setMessages((prev) => [
           ...prev,
-          { _id: Date.now() + 1, sender: "Bot", text: "Connection restored! You can now send messages. 🎉" },
+          { _id: Date.now() + 1, sender: "Bot", text: "Connection restored! 🎉" },
         ]);
         setConnectionError(false);
       } else throw new Error("Server still unavailable");
@@ -124,8 +131,56 @@ const Chatbot = () => {
       console.error("Reconnection error:", err);
       setMessages((prev) => [
         ...prev,
-        { _id: Date.now() + 2, sender: "Bot", text: "Still can't connect. Please make sure the backend is running. 🔧" },
+        { _id: Date.now() + 2, sender: "Bot", text: "Still can't connect. 🔧" },
       ]);
+    }
+  };
+
+  // Start recording audio
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        if (event.data.size > 0) audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorderRef.current.onstop = sendAudioToServer;
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+    } catch (err) {
+      console.error("Mic access denied:", err);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  // Send recorded audio to backend for STT
+  const sendAudioToServer = async () => {
+    const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+    const formData = new FormData();
+    formData.append("audio", blob);
+
+    try {
+      const res = await fetch(`${SERVER}/api/speech/speech-to-text`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.transcription) {
+        setInput(data.transcription); 
+        // Optionally auto-send:
+        // sendMessage();
+      }
+    } catch (err) {
+      console.error("STT Error:", err);
     }
   };
 
@@ -133,6 +188,22 @@ const Chatbot = () => {
     <div className="chatbot-container">
       <div className="chatbot-header">
         <h2>AI Friend Chatbot</h2>
+        <button
+          className="clear-chat-btn"
+          onClick={async () => {
+            if (!window.confirm("Are you sure you want to clear chat history?")) return;
+            try {
+              const res = await fetch(`${SERVER}/api/chatbot/${userId}`, { method: "DELETE" });
+              if (!res.ok) throw new Error("Failed to clear chat");
+              setMessages([{ _id: Date.now(), sender: "Bot", text: "Chat cleared! 😊" }]);
+            } catch (err) {
+              console.error("Clear chat error:", err);
+              alert("Failed to clear chat. Try again.");
+            }
+          }}
+        >
+          🗑
+        </button>
       </div>
 
       <div className="messages-container">
@@ -151,6 +222,7 @@ const Chatbot = () => {
             </div>
           </div>
         )}
+
         <div ref={messagesEndRef} />
       </div>
 
@@ -170,11 +242,16 @@ const Chatbot = () => {
           rows={1}
           disabled={isLoading}
         />
+        <button
+          onMouseDown={startRecording}
+          onMouseUp={stopRecording}
+          className={isRecording ? "recording" : ""}
+          title="Hold to speak"
+        >
+          🎤
+        </button>
         <button onClick={sendMessage} disabled={isLoading || !input.trim()} className={input.trim() ? "active" : ""}>
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
+          ➤
         </button>
       </div>
     </div>

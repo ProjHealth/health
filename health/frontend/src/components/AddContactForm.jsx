@@ -13,6 +13,10 @@ const AddContactForm = ({ editContact, onContactAdded, onCancel }) => {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  if (!localUser) throw new Error("User not found in localStorage");
+  const userId = localUser.id;
+
   useEffect(() => {
     if (editContact) {
       setFormData({
@@ -38,7 +42,7 @@ const AddContactForm = ({ editContact, onContactAdded, onCancel }) => {
       const response = await fetch(url, {
         method: editContact ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, userId: 'default_user' })
+        body: JSON.stringify({ ...formData, userId: userId })
       });
 
       const data = await response.json();

@@ -13,6 +13,27 @@ const genAI = new GoogleGenAI({
 
 const MODEL = process.env.GENAI_MODEL || "gemini-2.0-flash";
 
+// GET /api/chatbot/:userId
+router.get("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid userId" });
+    }
+
+    const messages = await ChatMessage.find({ userId })
+      .sort({ timestamp: 1 })
+      .lean();
+
+    res.json({ messages });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch chat history" });
+  }
+});
+
+
 // POST /api/chatbot
 router.post("/", async (req, res) => {
   try {
@@ -66,6 +87,33 @@ router.post("/", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "chat_failed", detail: err.message });
+  }
+});
+
+
+// DELETE /api/chatbot/:userId - Clear all chat history for a user
+router.delete("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Validate userId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid userId" });
+    }
+
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+
+    // Delete all messages for this user
+    const result = await ChatMessage.deleteMany({ userId: userObjectId });
+
+    res.json({
+      success: true,
+      deletedCount: result.deletedCount,
+      message: "Chat history cleared successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "clear_chat_failed", detail: err.message });
   }
 });
 

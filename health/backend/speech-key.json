@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mentalhealth-469915",
+  "private_key_id": "aa776d4e470075d53de36479d2d5097506d790e3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEpoxlAlOcpNyV\nLZfB4UQfSoeiwrXRQQVxVk+hk54TowgG2zUGtbkLXsM4o6qsSR/LN52vYw3XrFzk\n7BwFqv2eKUmjGqnf7N05pkt9cDXaPh3EAjJtHy1IsgeS0ckNJ9NYfM6qo8CwXG7p\nhr0sallOaMXm1wNUXsI4vjSkPbI5+V5LjgmzN7RJsAmFnRadFWd0KpNCkS8cE/aG\nYejN08BwHNNdIml90ZFvbgmqhStzWYSMOO6niCM1X/O6Vgw1T611GZr1OATyQLMR\nJXNTk9PoDb1Fa0qNoinw8HGMH6BA7z5BJC5bK2udtnlfqBoiITdIObdw2I3FW3CM\nFsTGYWCRAgMBAAECggEAMEJsLWS9BrHpxT1fYw/okyJL94w/qPcDQi1rlOxAbLLD\nh0U39enWW905XRbDTY0TfaBsNOzC6qUM1gxAkz6Dh5M71Eh4nHDJWLrAB2xoduLs\nFJxyaheu2gqAs84CgFU/91UHtdZCdTV17Z7ooXQG7yhkutIU6dloYhsBmbXfXXzv\ni3yam81kulBrbdCMIlMUdY+0QOXstasQ5VYbVbIzMqp8RlUR26/4D333YgbIQg83\nAmQBTNPNiS0erig9UdwU0m20N0XHcTZaR8Cdb2H0HLGohnO71RkwM0DWuUSTXJsZ\nkt6OZN6TWQ04OlP/YK11Luf1kO+JVJOjBaDlXp+MrQKBgQD7PoZ/rx48sgBLilC6\nNz67qWnwhgNdJBQ1HmqWLkcRsr011Z4ipapNXd/7YXUHATFsXeHifesRRTex/PTU\nXOXAkF4Tpl2RwbLwQhBtAkHYbXy3M9VkgapZ1FFXyoOGnvTV1apb+Sa87ElEo33T\ntT/+pz5npzP//ooJ16B6v7MzPQKBgQDIX3lejDUPIfoB//6F0wXllMA3gkIqA14T\nYZNH0ZCTdbclFkKu19Z5a2s9LG3tBFEKUceG912H5pKYA7H3ZCHjp0WbmEeD2eJN\nHJObZ+2rGkVt9Vgmvqt9QX87Fc2Ldy1ueQsO01leynB5/GY5UJHYLUcFrc9Z0zvg\nqoXpcsNn5QKBgQDqUZwbBXXL4a9IxI0Zv2BwoUY+np4Qhg+aou2Bd1Os++hfhwVf\nBubYFQ9KYdBFYiV4De8Xz5wmlUmmZGbqkGFuwLYc2XI2+FIspVCwegRzF1nTezIv\n9IauFMhwel1EdoedzxJ9iNdKJ40FyP0XL9mpZM1c2qIyxHB1UXdIQ/WbeQKBgHCw\nkVfFTsn1999ME987sSNPJ1OQpJlwT2ZjCCvqBn+IQrpO7K3cobij2yoKZMBaHyHI\noIidcjLOUD/CREK4Q/7+wj0hxYa38XggzDsolhgWrFmNFEimD1hgj6exOWpoWlq5\nJKjv4GFZRSy18N/nGj8UJ89f0y/XhuNxw+JpMtCpAoGAWD0BzwHyosITGVHSPc7S\nZ/LQmyQ34w874Nl4eLW2O3E/iLbVnHzpi0m3VhvVZ5xdn2Pf3jCCWET6jKRB2bGc\nIqZjVLqbws7So4SJEjfiICAC+ySkCND+fmc5fqR5sPJ2ZNz4HpATeRFWabr/KtSL\nTU1AmbM+BuUUsyIoRreVwcY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "speech-to-text-service@mentalhealth-469915.iam.gserviceaccount.com",
+  "client_id": "107784559245995226872",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/speech-to-text-service%40mentalhealth-469915.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
