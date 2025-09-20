@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./Chatbot.css";
+import "./Chatbot.css"; // Assuming you have a CSS file
 
-// Component for individual messages
+// Component for individual messages (Unchanged)
 const ChatMessage = ({ message }) => {
   const { sender, text } = message;
   const isBot = sender === "Bot";
@@ -28,12 +28,13 @@ const Chatbot = () => {
 
   const SERVER = "http://localhost:5000"; // backend URL
 
-  // Get user info
+  // Get user info (Assuming this is correct for your app)
   const localUser = JSON.parse(localStorage.getItem("user"));
-  if (!localUser) throw new Error("User not found in localStorage");
-  const userId = localUser.id;
+  // Added conditional check to prevent crash on missing user
+  const userId = localUser ? localUser.id : "guest_user"; 
+  // if (!localUser) throw new Error("User not found in localStorage");
 
-  // Fetch chat history
+  // Fetch chat history (Unchanged)
   const fetchHistory = async () => {
     try {
       const res = await fetch(`${SERVER}/api/chatbot/${userId}`);
@@ -61,12 +62,12 @@ const Chatbot = () => {
     fetchHistory();
   }, []);
 
-  // Auto-scroll
+  // Auto-scroll (Unchanged)
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Send message
+  // Send message (Unchanged)
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -103,7 +104,7 @@ const Chatbot = () => {
     }
   };
 
-  // Handle enter key
+  // Handle enter key (Unchanged)
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -111,7 +112,7 @@ const Chatbot = () => {
     }
   };
 
-  // Retry connection
+  // Retry connection (Unchanged)
   const retryConnection = async () => {
     setMessages((prev) => [
       ...prev,
@@ -136,11 +137,13 @@ const Chatbot = () => {
     }
   };
 
-  // Start recording audio
+  // 🟢 FIX: Start recording audio using supported WebM/Opus encoding
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorderRef.current = new MediaRecorder(stream);
+      
+      // Use WebM/Opus, which is widely supported and compatible with Google STT's WEBM_OPUS
+      mediaRecorderRef.current = new MediaRecorder(stream, { mimeType: 'audio/webm; codecs=opus' }); 
       audioChunksRef.current = [];
 
       mediaRecorderRef.current.ondataavailable = (event) => {
@@ -152,35 +155,60 @@ const Chatbot = () => {
       setIsRecording(true);
     } catch (err) {
       console.error("Mic access denied:", err);
+      alert("Microphone access is required. Error: " + err.name + " - Check HTTPS/Permissions.");
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current) {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
     }
   };
 
-  // Send recorded audio to backend for STT
-  const sendAudioToServer = async () => {
+  // 🟢 FIX: Send recorded audio to backend for STT using the 'audio/webm' Blob type
+const sendAudioToServer = async () => {
     const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+    
+    // 🟢 FIX: Check if the blob is empty before attempting to send
+    if (blob.size === 0) {
+        console.warn("Recording was too short or failed to capture data.");
+        // Optional: Alert the user
+        alert("Please hold the microphone button longer to record speech.");
+        return; 
+    }
+
     const formData = new FormData();
-    formData.append("audio", blob);
+    formData.append("audio", blob, "recording.webm"); 
 
     try {
+      setIsLoading(true);
       const res = await fetch(`${SERVER}/api/speech/speech-to-text`, {
         method: "POST",
+        // Do NOT manually set Content-Type; fetch handles multipart/form-data boundary
         body: formData,
       });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.details || "STT Server Error");
+      }
+      
       const data = await res.json();
       if (data.transcription) {
         setInput(data.transcription); 
-        // Optionally auto-send:
-        // sendMessage();
+        // Optional: Call sendMessage() here to auto-send the transcribed text
+      } else {
+         console.warn("No transcription received or speech detected.");
       }
     } catch (err) {
       console.error("STT Error:", err);
+      setMessages((prev) => [
+        ...prev,
+        { _id: Date.now() + 3, sender: "Bot", text: "Sorry, I couldn't process the voice command. 🎤" },
+      ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -247,8 +275,9 @@ const Chatbot = () => {
           onMouseUp={stopRecording}
           className={isRecording ? "recording" : ""}
           title="Hold to speak"
+          disabled={isLoading}
         >
-          🎤
+          {isRecording ? "🔴" : "🎤"}
         </button>
         <button onClick={sendMessage} disabled={isLoading || !input.trim()} className={input.trim() ? "active" : ""}>
           ➤
