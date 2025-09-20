@@ -31,7 +31,7 @@ const AppRoutes = () => {
         <Route path="/moodcalendar" element={<ProtectedRoute><MoodCalendar /></ProtectedRoute>} /> */}
         <Route path="/community" element={<ProtectedRoute><CommunityGroups /></ProtectedRoute>} />
         <Route path="/groups/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
-        <Route path="/chatbot" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
+        <Route path="/chatbot:chatId" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
         <Route path="/emergency" element={<ProtectedRoute><Emergency /></ProtectedRoute>} />
         <Route path="/mooddashboard" element={<ProtectedRoute><MoodDashboard /></ProtectedRoute>} />
         <Route path="/moodinput" element={<ProtectedRoute><MoodInput /></ProtectedRoute>} /> 

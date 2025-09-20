@@ -12,6 +12,7 @@ import chatRouter from './routes/chat.js';
 import professionals from './routes/doctor.js';
 import expertsRoutes from './routes/experts.js';
 import { seedDatabase } from './seedExperts.js';
+import chatbotRoutes from './routes/chatbot.js';
 
 dotenv.config();
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/communities', communitiesRoutes);
 app.use('/api/moods', moodsRoutes);
 app.use('/api/v1/mood', moodRoutes);
+app.use('/api/chatbot', chatbotRoutes); // Gemini AI chat route
 app.use('/api/emergency', emergencyRoutes);
 app.use('/api/contacts', emergencyRoutes);
 app.use('/api/friends', friendsRouter);
