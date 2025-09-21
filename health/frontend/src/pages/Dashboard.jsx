@@ -17,7 +17,7 @@ const Dashboard = () => {
         </Link>
 
         {/* AI Friend */}
-        <Link to="/chatbot" className="dashboard-icon">
+        <Link to="/chatbot:chatid" className="dashboard-icon">
           <FaRobot className="icon ai" />
           <p>AI Friend</p>
         </Link>

@@ -1,0 +1,328 @@
+.expert-profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.back-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #0056b3;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Expert Header */
+.expert-header {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.expert-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.expert-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.expert-header-info {
+  flex: 1;
+}
+
+.expert-name-verified {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.expert-name-verified h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.verified-badge {
+  background: #007bff;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.expert-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.expert-bio {
+  margin: 0 0 1.5rem 0;
+  color: #555;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.expert-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.expert-specializations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.specialization-tag-large {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.expert-credentials {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.expert-credentials strong {
+  color: #333;
+}
+
+.follow-btn {
+  background: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.follow-btn:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.follow-btn.following {
+  background: #28a745;
+  border-color: #28a745;
+}
+
+.follow-btn.following:hover {
+  background: #1e7e34;
+  border-color: #1e7e34;
+}
+
+.follow-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Expert Posts Section */
+.expert-posts-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.expert-posts-section h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.no-posts {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.posts-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.post-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.post-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-content {
+  padding: 1.5rem;
+}
+
+.post-category {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.post-title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.post-text {
+  margin: 0 0 1rem 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.post-likes {
+  color: #e91e63;
+  font-weight: 500;
+}
+
+.post-date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .expert-profile-container {
+    padding: 1rem;
+  }
+  
+  .expert-header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .expert-avatar-large {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .expert-name-verified h1 {
+    font-size: 1.5rem;
+  }
+  
+  .expert-stats {
+    justify-content: center;
+  }
+  
+  .expert-specializations {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .expert-header {
+    padding: 1.5rem;
+  }
+  
+  .expert-posts-section {
+    padding: 1.5rem;
+  }
+  
+  .post-content {
+    padding: 1rem;
+  }
+}

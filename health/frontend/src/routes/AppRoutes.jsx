@@ -13,8 +13,13 @@ import MoodDashboard from "../pages/MoodDash";
 import AddFriend from "../pages/Addfriend";
 import ChatPage from "../pages/ChatPage";
 import ProfessionalHelpDashboard from "../pages/ProfessionalHelp";
+<<<<<<< HEAD
 import TherapistProfile from "../pages/TherapistProfile";
 
+=======
+import ExpertProfile from "../pages/ExpertProfile";
+
+>>>>>>> 8b784671f9cd083d1d4b358f2bf1bb88e65f6d35
 
 
 const AppRoutes = () => {
@@ -32,14 +37,18 @@ const AppRoutes = () => {
         <Route path="/moodcalendar" element={<ProtectedRoute><MoodCalendar /></ProtectedRoute>} /> */}
         <Route path="/community" element={<ProtectedRoute><CommunityGroups /></ProtectedRoute>} />
         <Route path="/groups/:groupId" element={<ProtectedRoute><GroupChat /></ProtectedRoute>} />
-        <Route path="/chatbot" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
+        <Route path="/chatbot:chatId" element={<ProtectedRoute><Chatbot /></ProtectedRoute>} />
         <Route path="/emergency" element={<ProtectedRoute><Emergency /></ProtectedRoute>} />
         <Route path="/mooddashboard" element={<ProtectedRoute><MoodDashboard /></ProtectedRoute>} />
         <Route path="/moodinput" element={<ProtectedRoute><MoodInput /></ProtectedRoute>} /> 
         <Route path="/addfriend" element={<ProtectedRoute><AddFriend /></ProtectedRoute>} />
         <Route path="/chat/:chatId" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
         <Route path="/support" element={<ProtectedRoute><ProfessionalHelpDashboard /></ProtectedRoute>} />
+<<<<<<< HEAD
         <Route path="/therapist/:id" element={<ProtectedRoute><TherapistProfile /></ProtectedRoute>} />
+=======
+        <Route path="/expert/:expertId" element={<ExpertProfile />} /> 
+>>>>>>> 8b784671f9cd083d1d4b358f2bf1bb88e65f6d35
         {/* Add more routes as needed */}
       </Routes>
     </Router>

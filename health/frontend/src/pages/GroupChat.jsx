@@ -64,6 +64,27 @@ const GroupChat = () => {
       console.error("❌ Send failed:", err.response?.data || err.message);
     }
   };
+const handleChat = async (friendId) => {
+  if (!friendId) return console.error("Friend ID is missing");
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/chat/initiate/${friendId}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const data = await res.json();
+    if (!data.chatId) {
+      console.error("Chat ID not returned from backend");
+      return;
+    }
+
+    window.location.href = `/chat/${data.chatId}`;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="chat-container">
