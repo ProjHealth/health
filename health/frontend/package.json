@@ -11,6 +11,11 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
+<<<<<<< HEAD
+    "axios": "^1.11.0",
+    "bootstrap": "^5.3.8",
+=======
+>>>>>>> 8b784671f9cd083d1d4b358f2bf1bb88e65f6d35
     "express": "^5.1.0",
     "firebase": "^11.3.1",
     "google-auth-library": "^10.2.1",
