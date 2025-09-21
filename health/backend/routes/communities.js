@@ -5,6 +5,7 @@ import Message from "../models/Message.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { moderateMessage } from "../utils/moderation.js";
 
 dotenv.config();
 
@@ -125,17 +126,17 @@ router.post("/join/:id", authMiddleware, async (req, res) => {
 
 
 router.post("/leave/:id", authMiddleware, async (req, res) => {
-  console.log("POST /leave/:id - Community ID:", req.params.id, "User ID:", req.userId);
-  
-  try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: "Invalid community ID" });
-    }
+  console.log("POST /leave/:id - Community ID:", req.params.id, "User ID:", req.userId);
+  
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid community ID" });
+    }
 
-    const community = await Community.findById(req.params.id);
-    if (!community) {
-      return res.status(404).json({ message: "Community not found" });
-    }
+    const community = await Community.findById(req.params.id);
+    if (!community) {
+      return res.status(404).json({ message: "Community not found" });
+    }
 
 
     if (community.members.length === 1 && community.members[0].toString() === req.userId.toString()) {
@@ -149,18 +150,18 @@ router.post("/leave/:id", authMiddleware, async (req, res) => {
     }
     // **NEW LOGIC ENDS HERE**
 
-    // Original logic to remove user from members array
-    community.members = community.members.filter(
-      (memberId) => memberId.toString() !== req.userId.toString()
-    );
-    await community.save();
+    // Original logic to remove user from members array
+    community.members = community.members.filter(
+      (memberId) => memberId.toString() !== req.userId.toString()
+    );
+    await community.save();
 
-    console.log("User removed from community successfully");
-    res.json({ message: "Left group successfully" });
-  } catch (err) {
-    console.error("Error in /leave:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
+    console.log("User removed from community successfully");
+    res.json({ message: "Left group successfully" });
+  } catch (err) {
+    console.error("Error in /leave:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 });
 
 // Delete a community (only creator can delete)
@@ -238,47 +239,50 @@ router.get("/:id/messages", authMiddleware, async (req, res) => {
 });
 
 // Post a message to a community
-router.post("/:id/messages", authMiddleware, async (req, res) => {
-  try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: "Invalid community ID" });
+router.post(
+  "/:id/messages", authMiddleware,
+  moderateMessage,
+  async (req, res) => {
+    try {
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.status(400).json({ message: "Invalid community ID" });
+      }
+
+      const { content, anonymous } = req.body;
+      
+      if (!content || content.trim().length === 0) {
+        return res.status(400).json({ message: "Message content is required" });
+      }
+
+      // Check if community exists and user is a member
+      const community = await Community.findById(req.params.id);
+      if (!community) {
+        return res.status(404).json({ message: "Community not found" });
+      }
+
+      const isMember = community.members.some(
+        memberId => memberId.toString() === req.userId.toString()
+      );
+      
+      if (!isMember) {
+        return res.status(403).json({ message: "You must be a member to post messages" });
+      }
+
+      const message = new Message({
+        community: req.params.id,
+        sender: req.userId,
+        content: content.trim(),
+        anonymous: !!anonymous,
+        createdAt: new Date(),
+      });
+
+      await message.save();
+      const populated = await message.populate("sender", "name email");
+      res.status(201).json(populated);
+    } catch (err) {
+      console.error("Error in POST /:id/messages:", err);
+      res.status(500).json({ message: "Server error", error: err.message });
     }
-
-    const { content, anonymous } = req.body;
-    
-    if (!content || content.trim().length === 0) {
-      return res.status(400).json({ message: "Message content is required" });
-    }
-
-    // Check if community exists and user is a member
-    const community = await Community.findById(req.params.id);
-    if (!community) {
-      return res.status(404).json({ message: "Community not found" });
-    }
-
-    const isMember = community.members.some(
-      memberId => memberId.toString() === req.userId.toString()
-    );
-    
-    if (!isMember) {
-      return res.status(403).json({ message: "You must be a member to post messages" });
-    }
-
-    const message = new Message({
-      community: req.params.id,
-      sender: req.userId,
-      content: content.trim(),
-      anonymous: !!anonymous,
-      createdAt: new Date(),
-    });
-
-    await message.save();
-    const populated = await message.populate("sender", "name email");
-    res.status(201).json(populated);
-  } catch (err) {
-    console.error("Error in POST /:id/messages:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
-  }
 });
 
 // Debug route to list all available routes

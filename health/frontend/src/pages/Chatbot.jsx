@@ -167,50 +167,67 @@ const Chatbot = () => {
   };
 
   // 🟢 FIX: Send recorded audio to backend for STT using the 'audio/webm' Blob type
+// 🟢 FIX: Send recorded audio to backend for STT using the 'audio/webm' Blob type
 const sendAudioToServer = async () => {
-    const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-    
-    // 🟢 FIX: Check if the blob is empty before attempting to send
-    if (blob.size === 0) {
-        console.warn("Recording was too short or failed to capture data.");
-        // Optional: Alert the user
-        alert("Please hold the microphone button longer to record speech.");
-        return; 
+  const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+
+  if (blob.size === 0) {
+    console.warn("Recording was too short or failed to capture data.");
+    alert("Please hold the microphone button longer to record speech.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("audio", blob, "recording.webm");
+
+  try {
+    setIsLoading(true);
+    const res = await fetch(`${SERVER}/api/speech/speech-to-text`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.details || "STT Server Error");
     }
 
-    const formData = new FormData();
-    formData.append("audio", blob, "recording.webm"); 
+    const data = await res.json();
 
-    try {
-      setIsLoading(true);
-      const res = await fetch(`${SERVER}/api/speech/speech-to-text`, {
+    if (data.transcription) {
+      // 🟢 Instead of just setting input, send to chatbot immediately
+      const userMessage = { _id: Date.now(), sender: "You", text: data.transcription };
+      setMessages((prev) => [...prev, userMessage]);
+
+      // Send transcription to chatbot endpoint
+      const response = await fetch(`${SERVER}/api/chatbot`, {
         method: "POST",
-        // Do NOT manually set Content-Type; fetch handles multipart/form-data boundary
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, text: data.transcription }),
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.details || "STT Server Error");
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.detail || "Server error");
       }
-      
-      const data = await res.json();
-      if (data.transcription) {
-        setInput(data.transcription); 
-        // Optional: Call sendMessage() here to auto-send the transcribed text
-      } else {
-         console.warn("No transcription received or speech detected.");
-      }
-    } catch (err) {
-      console.error("STT Error:", err);
-      setMessages((prev) => [
-        ...prev,
-        { _id: Date.now() + 3, sender: "Bot", text: "Sorry, I couldn't process the voice command. 🎤" },
-      ]);
-    } finally {
-      setIsLoading(false);
+
+      const botData = await response.json();
+      const botMessage = { _id: Date.now() + 1, sender: "Bot", text: botData.reply };
+      setMessages((prev) => [...prev, botMessage]);
+    } else {
+      console.warn("No transcription received or speech detected.");
     }
-  };
+  } catch (err) {
+    console.error("STT Error:", err);
+    setMessages((prev) => [
+      ...prev,
+      { _id: Date.now() + 3, sender: "Bot", text: "Sorry, I couldn't process the voice command. 🎤" },
+    ]);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="chatbot-container">

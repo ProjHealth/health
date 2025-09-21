@@ -47,7 +47,7 @@ const GroupChat = () => {
   // Send message
   const sendMessage = async () => {
     if (!newMessage.trim() || !token) {
-      console.log("Blocked because no message or token:", newMessage, token);
+      // The redundant log message has been removed.
       return;
     }
     try {
@@ -64,26 +64,26 @@ const GroupChat = () => {
       console.error("❌ Send failed:", err.response?.data || err.message);
     }
   };
-const handleChat = async (friendId) => {
-  if (!friendId) return console.error("Friend ID is missing");
+  const handleChat = async (friendId) => {
+    if (!friendId) return console.error("Friend ID is missing");
 
-  try {
-    const res = await fetch(`http://localhost:5000/api/chat/initiate/${friendId}`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    try {
+      const res = await fetch(`http://localhost:5000/api/chat/initiate/${friendId}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    const data = await res.json();
-    if (!data.chatId) {
-      console.error("Chat ID not returned from backend");
-      return;
+      const data = await res.json();
+      if (!data.chatId) {
+        console.error("Chat ID not returned from backend");
+        return;
+      }
+
+      window.location.href = `/chat/${data.chatId}`;
+    } catch (err) {
+      console.error(err);
     }
-
-    window.location.href = `/chat/${data.chatId}`;
-  } catch (err) {
-    console.error(err);
-  }
-};
+  };
 
 
   return (
@@ -98,8 +98,8 @@ const handleChat = async (friendId) => {
           const senderEmail = msg.anonymous
             ? ""
             : msg.sender?.email
-            ? ` (${msg.sender.email})`
-            : "";
+              ? ` (${msg.sender.email})`
+              : "";
           const date = new Date(msg.createdAt);
           return (
             <div
@@ -130,6 +130,11 @@ const handleChat = async (friendId) => {
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage();
+            }
+          }}
           className="chat-input"
           placeholder="Type a message..."
         />
