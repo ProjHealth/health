@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mentalhealth-469915",
+  "private_key_id": "277edcaaaa86f42237b58821218ac8e4a0068e47",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZrMlwVEumHMA7\nf06JzwztCrHCdc69aK6tPr26WgZ8f4MVU0VQlCbSmlXrx8Q/GqjSf7vSsusfn8c+\ntj0gDQUE28vd7c9miBBzd8NyCVi8QxjgyQxoH7sKWtyU3vP5E7cYHshCY+fbDunr\nRHyeXQzPx8vmoBI+Drjuku5mBfs/mnXdWUfzMWL01fGg81tKBWUq+4OQg6R6fUS8\nb69WFlh6/bwClWtzX/6g8RMyrVR7x69RmEIrPBzLQPFLpZv2la8mXnzXiyK9W4Ov\nTDF8XvWEitA0W2qYtGle+8+eJlTKJtLm7qK+YUhHxkRXJWkOuzb+sfJYTrTlNl/O\nRo5dZiD/AgMBAAECggEAEemzXVrqgMh+lJwviTgF5HSMAqiG3gprztZKGbhH2V31\nmmnTBe8IhNiY4oF60ltDclMlpeX9uF6shaoh50MlsGvVX+AulaLz1koQRjr5AkEe\nnnzyWEKS4KbFM+ZnEGPBc6rbfa8oCNxg0/C7tUfgrTFQGRyqHlDq12M1sCVPiEEV\noZmYIdj9mk8jUxYnNiycRYHb+13jh03BAZTnL3XS+azosxzimY4Dn2+dQyTLODh5\nR/vMUwlJlV+Sr9KwN8bsOhQz1U85LrldfagQCm/OaZtGTcvPP5D33679rs9Qd3aD\nhItqu0glACXOkJmjAAe4b4pO2Vshqm85YsElOLYsDQKBgQD/f+fEnEKRVWX9IV23\njpz0NKv6ls9BDbAdEC77WLh6ReEfPOPuXMkfIyjy08qyIBEpY1IlzT2BoHkBL1Of\nphEJLgSV+Ch2dIubeRVgJNXqY2P08yuSMcAhkpy0D25cLyOL9GMaJmpf4mLD0iWa\ntit+I5fyoCrYnOWOyTkdtvjY2wKBgQDaGesK4Lebzd9xISAUg9sR4xqX8M+FYPwB\nqMKh813Mw2CVdhINFWvFo8avYsRdRs1i9w87UN9VzzuIwVCxsoIRroDIKRuPJlk2\nXa5ItPNery5wj2pzINenCuJ67+B0pgrBEhEJ3qhHxKAfrKohYeLe87OuG2U+8srd\nKBcFjfBPrQKBgQDIyowqR2NJNAPi2sX762gNwxck6EAYr9kn/f/uJ9tSvHgfRIsc\nWG72uXsE2s0BD5JtJFD6xEECDksKU1c0sB3TSQbxlQS3kv/kP1Q9KrWybkmvxysG\nyXJk8AOWvknMyH73DiiT9HzEvfVAT3aeD2w+xVo0owsJEMSXYiww3grS4QKBgE/L\n780ZDtR4bGoNvpkC7SIMP2yb9LFOHKXWwu9SBV2nlizY+B3FWpsDIuyEbGfcQcUV\ns4L2QeA5ZATTBd0d/KzPddrF/4lOdJGJkPyVB/36hjk0n7PjrkM1nktwfGTxYznk\njEtaJaOscxFjsRNppwH/lBv9dfukBUkJI/MqTWQ5AoGBAJDEBqFmrCQhgt2XV4nZ\nP2lXaXA9NNZydrTycuwzjQqqxsMhoRm7HbxR+4uTheK1BsjtfZH3waYt2MdS2aAM\nM3BEJRAR538NpDMV3Q0yrOkh6/XYeSkL1ETr4AcUWZ8BD5O/6WoY8iDnF0g1gEF6\nmhpwTXvvWHZwcukQp1ficzqL\n-----END PRIVATE KEY-----\n",
+  "client_email": "vertex-ai-sa@mentalhealth-469915.iam.gserviceaccount.com",
+  "client_id": "113820586781120018946",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vertex-ai-sa%40mentalhealth-469915.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
