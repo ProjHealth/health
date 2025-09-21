@@ -6,8 +6,18 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background-color: #f1f5f9;
+
+  /* Purple pastel radial gradient background */
+  background-color: #f7f2ff; /* base pastel purple */
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(210, 180, 255, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(230, 200, 255, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(240, 210, 255, 0.4) 0%, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 
 /* Bigger Emergency Box */
 .emergency-container {

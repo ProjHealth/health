@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./TherapistProfile.css";
 
 export default function TherapistProfile({ therapist, onClose, onBookAppointment }) {
   if (!therapist) return null;

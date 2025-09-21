@@ -45,10 +45,28 @@ const MoodInput = ({ onMoodLogged }) => {
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-md bg-white">
+    <div
+      style={{
+        padding: "16px",
+        border: "1px solid #ddd",
+        borderRadius: "12px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        backgroundColor: "#fff",
+        maxWidth: "500px",
+        margin: "0 auto",
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full p-2 border rounded-md"
+          style={{
+            width: "100%",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            resize: "none",
+            fontSize: "14px",
+            outline: "none",
+          }}
           rows="3"
           value={moodText}
           onChange={(e) => setMoodText(e.target.value)}
@@ -57,12 +75,38 @@ const MoodInput = ({ onMoodLogged }) => {
         <button
           type="submit"
           disabled={loading}
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          style={{
+            marginTop: "10px",
+            padding: "10px 16px",
+            backgroundColor: loading ? "#93c5fd" : "#3b82f6",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: loading ? "not-allowed" : "pointer",
+            fontSize: "14px",
+            transition: "background-color 0.2s ease",
+          }}
+          onMouseOver={(e) => {
+            if (!loading) e.currentTarget.style.backgroundColor = "#2563eb";
+          }}
+          onMouseOut={(e) => {
+            if (!loading) e.currentTarget.style.backgroundColor = "#3b82f6";
+          }}
         >
           {loading ? "Saving..." : "Log Mood"}
         </button>
       </form>
-      {message && <p className="mt-2 text-sm">{message}</p>}
+      {message && (
+        <p
+          style={{
+            marginTop: "8px",
+            fontSize: "13px",
+            color: message.includes("✅") ? "green" : "red",
+          }}
+        >
+          {message}
+        </p>
+      )}
     </div>
   );
 };

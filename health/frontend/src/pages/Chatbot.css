@@ -1,6 +1,6 @@
 /* Base styles */
 :root {
-    --primary-color: #7c4dff;
+    --primary-color: #bf8cc8;
     --primary-light: #b47cff;
     --secondary-color: #f5f5f5;
     --text-color: #333;
@@ -53,7 +53,6 @@ body {
     font-weight: 500;
 }
 
-/* Messages container */
 .messages-container {
     flex: 1;
     overflow-y: auto;
@@ -62,6 +61,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+            background-image: url("https://i.ibb.co/gbr9LFN9/Mental-Health-Awareness-Presentation-Peach-Aesthetic-Illustrated-4.jpg");
+        background-size: cover;            /* Cover entire viewport */
+        background-position: center;       /* Center the image */
+        background-repeat: no-repeat;      /* Prevent tiling */
+    
 }
 
 /* Message styles */
