@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #f8f8f8; /* soft light gray */
+  background-color: #d0f0c0; /* pastel green */
   padding: 0.75rem 0.5rem;
   padding-top: 20px;
   margin-top: 4%; 
@@ -23,7 +23,7 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   border-radius: 0.5rem;
-  background-color: #d9d9d9;  /* muted gray */
+  background-color: #b3e6a3;  /* muted pastel green */
   color: #111;                /* dark text */
   cursor: pointer;
   text-align: center;
@@ -34,12 +34,12 @@
 }
 
 .navbar button:hover {
-  background-color: #bfbfbf;  /* slightly darker gray on hover */
+  background-color: #9edb8f;  /* slightly darker green on hover */
   transform: scale(1.05);
 }
 
 .navbar button.active {
-  background-color: #a6a6a6;  /* active button color */
+  background-color: #87d073;  /* active button color */
   color: #fff;
 }
 
@@ -53,7 +53,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.75rem;
-  border-bottom: 2px solid #d9d9d9;
+  border-bottom: 2px solid #b3e6a3;
   padding-bottom: 0.25rem;
   color: #333;
 }
@@ -74,7 +74,7 @@
   padding: 1rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background-color: #f2f2f2;  /* soft muted gray */
+  background-color: #e2f7d6;  /* soft pastel green */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,7 +92,7 @@
 
 /* Placeholder photo */
 .doctor-photo.placeholder {
-  background-color: #bfbfbf;
+  background-color: #9edb8f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,7 +105,7 @@
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #d9d9d9;
+  background-color: #b3e6a3;
   color: #111;
   border: none;
   cursor: pointer;
@@ -113,7 +113,7 @@
 }
 
 .book-btn:hover {
-  background-color: #bfbfbf;
+  background-color: #9edb8f;
 }
 
 /* Review button */
@@ -121,20 +121,20 @@
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #f2f2f2;
+  background-color: #e2f7d6;
   color: #111;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #b3e6a3;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .review-btn:hover {
-  background-color: #e0e0e0;
+  background-color: #d0f0c0;
 }
 
 /* Body background */
 body, .min-h-screen {
-  background-color: #fafafa; /* light neutral background */
+  background-color: #d0f0c0; /* pastel green */
 }
 
 .page-container {
@@ -145,7 +145,7 @@ body, .min-h-screen {
 
 /* Page Heading */
 .page-heading {
-  background-color:#fafafa ;
+  background-color: #d0f0c0;
   position: fixed;
   font-size: 2.5rem;
   font-weight: bold;
@@ -158,7 +158,6 @@ body, .min-h-screen {
   padding-top: 10%; /* adjust based on navbar height */
 }
 
-.header-container{
-    background-color: #fafafa;
+.header-container {
+  background-color: #d0f0c0;
 }
-

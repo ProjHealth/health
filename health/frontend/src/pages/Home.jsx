@@ -8,9 +8,10 @@ const Home = () => {
       <div className="home-overlay"></div>
 
       <div className="home-card">
-        <h1 className="home-title">CodeStorm Wellness</h1>
+        <h1 className="home-title">MNS_Avengers presents <br></br>
+        <b> AuraAlly </b></h1>
         <p className="home-text">
-         Your AI Friend, 24/7 Professional Support, Mood Tracker, and Emergency Help, because your mind matters.
+         Your AI Friend, 24/7 Professional Support, Mood Tracker, Community, and Emergency Help, because your mind matters.
         </p>
 
         <div className="home-buttons">
