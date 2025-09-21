@@ -5,7 +5,6 @@ import Message from "../models/Message.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { moderateMessage } from "../utils/moderation.js";
 
 dotenv.config();
 
@@ -240,8 +239,8 @@ router.get("/:id/messages", authMiddleware, async (req, res) => {
 
 // Post a message to a community
 router.post(
-  "/:id/messages", authMiddleware,
-  moderateMessage,
+  "/:id/messages", 
+  authMiddleware, 
   async (req, res) => {
     try {
       if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
